@@ -2,7 +2,10 @@ package com.gildedrose.quality;
 
 import com.gildedrose.Item;
 
-public class ConcertIncreaseQualityStrategy implements IncreaseQualityStrategy {
+public class ConcertQualityStrategy implements QualityStrategy {
+
+    //TODO: 14/07/2022 kaan.sonmezoz: bunu concertBackStagePass diye vs isimlendirmek gerekebilir daha sonra
+
     @Override
     public void increase(Item item) {
         if (item.sellIn >= 11) {

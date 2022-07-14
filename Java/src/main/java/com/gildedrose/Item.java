@@ -1,6 +1,6 @@
 package com.gildedrose;
 
-import com.gildedrose.quality.IncreaseQualityStrategy;
+import com.gildedrose.quality.QualityStrategy;
 
 public class Item {
 
@@ -45,7 +45,7 @@ public class Item {
         return name.equals(AGED_BRIE_NAME);
     }
 
-    public void increaseQuality(IncreaseQualityStrategy strategy) {
+    public void increaseQuality(QualityStrategy strategy) {
         strategy.increase(this);
     }
 

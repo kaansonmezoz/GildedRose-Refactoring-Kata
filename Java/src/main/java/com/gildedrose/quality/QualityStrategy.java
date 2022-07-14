@@ -2,6 +2,6 @@ package com.gildedrose.quality;
 
 import com.gildedrose.Item;
 
-public interface IncreaseQualityStrategy {
+public interface QualityStrategy {
     void increase(Item item);
 }

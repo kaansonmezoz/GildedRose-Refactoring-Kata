@@ -60,7 +60,7 @@ Gilded Rose Requirements Specification
                 }
             } else {
                 if (item.isQualityLowerThanUpperLimit()) {
-                    IncreaseQualityStrategy increaseQualityStrategy = decideQualityIncreaseStrategy(item);
+                    QualityStrategy increaseQualityStrategy = decideQualityIncreaseStrategy(item);
                     item.increaseQuality(increaseQualityStrategy);
                 }
             }
@@ -89,11 +89,11 @@ Gilded Rose Requirements Specification
         }
     }
 
-    private IncreaseQualityStrategy decideQualityIncreaseStrategy(Item item) {
+    private QualityStrategy decideQualityIncreaseStrategy(Item item) {
         if (item.isConcert()) {
-            return new ConcertIncreaseQualityStrategy();
+            return new ConcertQualityStrategy();
         } else {
-            return new NormalIncreaseQualityStrategy();
+            return new NormalQualityStrategy();
 
         }
     }
