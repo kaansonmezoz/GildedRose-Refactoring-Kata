@@ -50,8 +50,7 @@ Gilded Rose Requirements Specification
 
     public void updateQuality() {
         for (Item item : items) {
-            if (!item.isAgedBrie()
-                && !item.isConcert()) {
+            if (!item.isAgedBrie() && !item.isConcert()) {
                 if (item.isQualityGreaterThanLowerLimit()) {
                     if (!item.isSulfuras()) {
                         item.quality = item.quality - 1;
