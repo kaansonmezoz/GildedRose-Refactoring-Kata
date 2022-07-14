@@ -1,9 +1,6 @@
 package com.gildedrose;
 
-import com.gildedrose.quality.IncreaseQualityStrategy;
-import com.gildedrose.quality.NormalIncreaseQualityStrategy;
-import com.gildedrose.quality.TripleIncreaseQualityStrategy;
-import com.gildedrose.quality.TwiceIncreaseQualityStrategy;
+import com.gildedrose.quality.*;
 
 class GildedRose {
 
@@ -93,26 +90,12 @@ Gilded Rose Requirements Specification
     }
 
     private IncreaseQualityStrategy decideQualityIncreaseStrategy(Item item) {
-        IncreaseQualityStrategy increaseQualityStrategy;
         if (item.isConcert()) {
-            increaseQualityStrategy = decideIncreaseQualityStrategyForConcert(item);
+            return new ConcertIncreaseQualityStrategy();
         } else {
-            increaseQualityStrategy = new NormalIncreaseQualityStrategy();
+            return new NormalIncreaseQualityStrategy();
 
         }
-        return increaseQualityStrategy;
-    }
-
-    private IncreaseQualityStrategy decideIncreaseQualityStrategyForConcert(Item item) {
-        IncreaseQualityStrategy increaseQualityStrategy;
-        if(item.sellIn >= 11) {
-            increaseQualityStrategy = new NormalIncreaseQualityStrategy();
-        } else if(item.sellIn >= 6){
-            increaseQualityStrategy = new TwiceIncreaseQualityStrategy();
-        } else {
-            increaseQualityStrategy = new TripleIncreaseQualityStrategy();
-        }
-        return increaseQualityStrategy;
     }
 
 }
