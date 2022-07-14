@@ -1,5 +1,10 @@
 package com.gildedrose;
 
+import com.gildedrose.quality.IncreaseQualityStrategy;
+import com.gildedrose.quality.NormalIncreaseQualityStrategy;
+import com.gildedrose.quality.TripleIncreaseQualityStrategy;
+import com.gildedrose.quality.TwiceIncreaseQualityStrategy;
+
 class GildedRose {
 
 /*
@@ -58,21 +63,8 @@ Gilded Rose Requirements Specification
                 }
             } else {
                 if (item.isQualityLowerThanUpperLimit()) {
-                    item.quality = item.quality + 1;
-
-                    if (item.isConcert()) {
-                        if (item.sellIn < 11) {
-                            if (item.isQualityLowerThanUpperLimit()) {
-                                item.quality = item.quality + 1;
-                            }
-                        }
-
-                        if (item.sellIn < 6) {
-                            if (item.isQualityLowerThanUpperLimit()) {
-                                item.quality = item.quality + 1;
-                            }
-                        }
-                    }
+                    IncreaseQualityStrategy increaseQualityStrategy = decideQualityIncreaseStrategy(item);
+                    item.increaseQuality(increaseQualityStrategy);
                 }
             }
 
@@ -88,7 +80,7 @@ Gilded Rose Requirements Specification
                                 item.quality = item.quality - 1;
                             }
                         }
-                    } else {
+                    } else {    // Konser gerceklestigi icin quality'si 0 olarak setleniyor
                         item.quality = item.quality - item.quality;
                     }
                 } else {
@@ -98,6 +90,29 @@ Gilded Rose Requirements Specification
                 }
             }
         }
+    }
+
+    private IncreaseQualityStrategy decideQualityIncreaseStrategy(Item item) {
+        IncreaseQualityStrategy increaseQualityStrategy;
+        if (item.isConcert()) {
+            increaseQualityStrategy = decideIncreaseQualityStrategyForConcert(item);
+        } else {
+            increaseQualityStrategy = new NormalIncreaseQualityStrategy();
+
+        }
+        return increaseQualityStrategy;
+    }
+
+    private IncreaseQualityStrategy decideIncreaseQualityStrategyForConcert(Item item) {
+        IncreaseQualityStrategy increaseQualityStrategy;
+        if(item.sellIn >= 11) {
+            increaseQualityStrategy = new NormalIncreaseQualityStrategy();
+        } else if(item.sellIn >= 6){
+            increaseQualityStrategy = new TwiceIncreaseQualityStrategy();
+        } else {
+            increaseQualityStrategy = new TripleIncreaseQualityStrategy();
+        }
+        return increaseQualityStrategy;
     }
 
 }

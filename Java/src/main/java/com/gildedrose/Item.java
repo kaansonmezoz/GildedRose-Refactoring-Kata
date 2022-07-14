@@ -1,5 +1,7 @@
 package com.gildedrose;
 
+import com.gildedrose.quality.IncreaseQualityStrategy;
+
 public class Item {
 
     private static final int QUALITY_UPPER_LIMIT = 50;
@@ -41,6 +43,10 @@ public class Item {
 
     public boolean isAgedBrie() {
         return name.equals(AGED_BRIE_NAME);
+    }
+
+    public void increaseQuality(IncreaseQualityStrategy strategy) {
+        strategy.increase(this);
     }
 
     @Override
